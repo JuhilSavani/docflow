@@ -24,7 +24,7 @@ const UserList = ({ users, currentUserId }) => {
           data-testid="user-list-button"
           variant="outline"
           size="sm"
-          className="flex items-center gap-2"
+          className="flex items-center gap-1 sm:gap-2 px-2 sm:px-3"
         >
           <Users className="w-4 h-4" />
           <span>{users.length}</span>

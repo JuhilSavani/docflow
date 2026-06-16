@@ -215,8 +215,8 @@ const Editor = () => {
     <div className="h-screen flex flex-col bg-white">
       {/* Header */}
       <div className="border-b border-slate-200 bg-white">
-        <div className="flex items-center justify-between px-6 py-3">
-          <div className="flex items-center gap-4">
+        <div className="flex items-center justify-between px-3 sm:px-6 py-2 sm:py-3">
+          <div className="flex items-center gap-2 sm:gap-4">
             <Button
               data-testid="back-home-button"
               variant="ghost"
@@ -238,13 +238,13 @@ const Editor = () => {
                     handleTitleBlur();
                   }
                 }}
-                className="text-lg font-semibold border-none shadow-none focus-visible:ring-0 px-2"
+                className="text-base sm:text-lg font-semibold border-none shadow-none focus-visible:ring-0 px-2 w-full max-w-[120px] sm:max-w-[200px] md:max-w-xs"
                 autoFocus
               />
             ) : (
               <h1
                 data-testid="document-title"
-                className="text-lg font-semibold text-slate-900 cursor-pointer hover:bg-slate-100 px-2 py-1 rounded"
+                className="text-base sm:text-lg font-semibold text-slate-900 cursor-pointer hover:bg-slate-100 px-2 py-1 rounded truncate max-w-[120px] sm:max-w-[200px] md:max-w-xs"
                 onClick={() => setIsEditingTitle(true)}
               >
                 {roomTitle}
@@ -252,18 +252,18 @@ const Editor = () => {
             )}
           </div>
 
-          <div className="flex items-center gap-4">
+          <div className="flex items-center gap-2 sm:gap-4">
             {/* Connection Status */}
-            <div className="flex items-center gap-2 text-sm">
+            <div className="flex items-center gap-1 sm:gap-2 text-xs sm:text-sm">
               {connected ? (
                 <>
                   <Wifi className="w-4 h-4 text-green-600" />
-                  <span className="text-slate-600">Connected</span>
+                  <span className="text-slate-600 hidden sm:inline">Connected</span>
                 </>
               ) : (
                 <>
                   <WifiOff className="w-4 h-4 text-red-600" />
-                  <span className="text-slate-600">Disconnected</span>
+                  <span className="text-slate-600 hidden sm:inline">Disconnected</span>
                 </>
               )}
             </div>
@@ -283,7 +283,7 @@ const Editor = () => {
       {/* Editor Content */}
       <div className="flex-1 overflow-auto">
         <div 
-          className="p-8"
+          className="p-4 sm:p-8 max-w-full"
           onClick={() => editor?.commands.focus()}
         >
           <EditorContent 
@@ -295,26 +295,24 @@ const Editor = () => {
       </div>
 
       {/* Room ID Footer */}
-      <div className="border-t border-slate-200 bg-slate-50 px-6 py-2">
-        <div className="flex items-center justify-between text-sm text-slate-600">
-          <div className="flex items-center gap-2">
-            <span className="font-medium">Room ID:</span>
-            <code className="bg-slate-200 px-2 py-1 rounded text-xs font-mono">{roomId}</code>
-            <Button
+      <div className="border-t border-slate-200 bg-slate-50 px-3 sm:px-6 py-2">
+        <div className="flex items-center justify-between text-sm text-slate-600 gap-2">
+          <div className="flex items-center gap-2 overflow-hidden">
+            <span className="font-medium shrink-0">Room ID:</span>
+            <code 
               data-testid="copy-room-id-button"
-              variant="ghost"
-              size="sm"
+              className="bg-slate-200 hover:bg-slate-300 transition-colors cursor-pointer px-2 py-1 rounded text-xs font-mono truncate max-w-[120px] sm:max-w-[200px] md:max-w-none select-none"
               onClick={() => {
                 navigator.clipboard.writeText(roomId);
                 toast.success("Room ID copied to clipboard");
               }}
-              className="text-xs"
+              title="Click to copy"
             >
-              Copy
-            </Button>
+              {roomId}
+            </code>
           </div>
-          <div className="text-xs text-slate-500">
-            {users.length} {users.length === 1 ? 'user' : 'users'} in room
+          <div className="text-xs text-slate-500 whitespace-nowrap shrink-0">
+            {users.length} {users.length === 1 ? 'user' : 'users'}
           </div>
         </div>
       </div>

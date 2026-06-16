@@ -34,8 +34,8 @@ const Toolbar = ({ editor }) => {
   );
 
   return (
-    <div className="border-t border-slate-200 bg-slate-50 px-6 py-2">
-      <div className="flex items-center gap-1 flex-wrap">
+    <div className="border-t border-slate-200 bg-slate-50 px-2 sm:px-6 py-2">
+      <div className="flex items-center gap-1 flex-wrap justify-start">
         {/* Text Formatting */}
         <ToolbarButton
           onClick={() => editor.chain().focus().toggleBold().run()}

@@ -129,10 +129,10 @@ const ExportMenu = ({ editor, title }) => {
           data-testid="export-menu-button"
           variant="outline"
           size="sm"
-          className="flex items-center gap-2"
+          className="flex items-center gap-2 px-2 sm:px-3"
         >
           <Download className="w-4 h-4" />
-          Export
+          <span className="hidden sm:inline">Export</span>
         </Button>
       </DropdownMenuTrigger>
       <DropdownMenuContent align="end">
