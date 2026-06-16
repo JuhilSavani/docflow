@@ -12,7 +12,7 @@ function App() {
           <Route path="/room/:roomId" element={<Editor />} />
         </Routes>
       </BrowserRouter>
-      <Toaster position="top-right" />
+      <Toaster position="bottom-right" />
     </div>
   );
 }
