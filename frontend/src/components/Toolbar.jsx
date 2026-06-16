@@ -121,20 +121,6 @@ const Toolbar = ({ editor }) => {
           icon={AlignRight}
           title="Align Right"
         />
-
-        <Separator orientation="vertical" className="h-6 mx-1" />
-
-        {/* Text Color */}
-        <div className="flex items-center gap-1">
-          <input
-            data-testid="toolbar-text-color"
-            type="color"
-            onInput={(e) => editor.chain().focus().setColor(e.target.value).run()}
-            value={editor.getAttributes('textStyle').color || '#000000'}
-            className="w-8 h-8 rounded cursor-pointer border border-slate-300"
-            title="Text Color"
-          />
-        </div>
       </div>
     </div>
   );
