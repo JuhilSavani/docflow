@@ -7,8 +7,6 @@ import {
 } from "./ui/dropdown-menu";
 import { Button } from "./ui/button";
 import { toast } from "sonner";
-import jsPDF from "jspdf";
-import html2canvas from "html2canvas";
 
 const ExportMenu = ({ editor, title }) => {
   const exportAsText = () => {
@@ -86,7 +84,6 @@ const ExportMenu = ({ editor, title }) => {
   </style>
 </head>
 <body>
-  <h1>${title}</h1>
   ${editor.getHTML()}
 </body>
 </html>`;
@@ -96,39 +93,21 @@ const ExportMenu = ({ editor, title }) => {
     toast.success("Exported as HTML");
   };
 
-  const exportAsPDF = async () => {
+  const exportAsPDF = () => {
     try {
-      toast.info("Generating PDF...");
+      const originalTitle = document.title;
+      // Change title temporarily so the default saved PDF filename is correct
+      document.title = title;
       
-      const editorElement = document.querySelector('.ProseMirror');
-      if (!editorElement) {
-        toast.error("Editor content not found");
-        return;
-      }
-
-      const canvas = await html2canvas(editorElement, {
-        scale: 2,
-        useCORS: true,
-        logging: false,
-      });
-
-      const imgData = canvas.toDataURL('image/png');
-      const pdf = new jsPDF({
-        orientation: 'portrait',
-        unit: 'mm',
-        format: 'a4',
-      });
-
-      const imgWidth = 210; // A4 width in mm
-      const imgHeight = (canvas.height * imgWidth) / canvas.width;
+      window.print();
       
-      pdf.addImage(imgData, 'PNG', 0, 0, imgWidth, imgHeight);
-      pdf.save(`${title}.pdf`);
-      
+      // Restore original title
+      document.title = originalTitle;
+
       toast.success("Exported as PDF");
     } catch (error) {
       console.error('PDF export error:', error);
-      toast.error("Failed to export PDF");
+      toast.error("Failed to open print dialog");
     }
   };
 
