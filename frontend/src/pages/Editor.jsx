@@ -224,8 +224,7 @@ const Editor = () => {
               onClick={() => navigate("/")}
               className="text-slate-600 hover:text-slate-900"
             >
-              <ArrowLeft className="w-4 h-4 mr-2" />
-              Home
+              <ArrowLeft className="w-4 h-4" />
             </Button>
             
             {isEditingTitle ? (
